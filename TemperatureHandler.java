@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class TemperatureComparator {
+public class TemperatureHandler{
     private static final Map<String, Map<String, Double>> temperatureData = new HashMap<>();
 
     public static void readTemperatureDataFromFile(String filename) {
@@ -101,23 +101,6 @@ public class TemperatureComparator {
         return formattedCity.toString().trim();
     }
 
-    public static void main(String[] args) {
-        String filename = "temperature_data.csv";
-        readTemperatureDataFromFile(filename);
+    
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter the country name: ");
-        String country = scanner.nextLine();
-
-        System.out.print("Enter the city name: ");
-        String city = scanner.nextLine();
-
-        System.out.print("Enter the temperature reading: ");
-        double temperature = scanner.nextDouble();
-
-        scanner.close();
-
-        compareTemperature(country, city, temperature);
-    }
 }
