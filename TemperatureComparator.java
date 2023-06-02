@@ -39,8 +39,8 @@ public class TemperatureComparator {
         String formattedCountry = formatCountry(country);
         String formattedCity = formatCity(city);
 
-        String morningKey = formattedCity + "_morning";
-        String eveningKey = formattedCity + "_evening";
+        String morningKey = formattedCity + "_Morning";
+        String eveningKey = formattedCity + "_Evening";
 
         Map<String, Double> cityTemperatures = temperatureData.get(formattedCountry);
         if (cityTemperatures != null) {
