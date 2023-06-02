@@ -1,0 +1,25 @@
+Country,City,Time,Temperature
+Japan,Tokyo,Morning,25.3
+Japan,Tokyo,Evening,28.7
+Japan,Osaka,Morning,13.3
+Japan,Osaka,Evening,16.8
+Spain,Madrid,Morning,20.1
+Spain,Madrid,Evening,23.4
+Spain,Barcelona,Morning,18.5
+Spain,Barcelona,Evening,21.8
+Sri Lanka,Colombo,Morning,27.6
+Sri Lanka,Colombo,Evening,30.2
+Sri Lanka,Kandy,Morning,22.4
+Sri Lanka,Kandy,Evening,20.3
+Mauritius,Port Louis,Morning,25.9
+Mauritius,Port Louis,Evening,28.3
+Mauritius,Curepipe,Morning,21.5
+Mauritius,Curepipe,Evening,24.9
+Malaysia,Miri,Morning,26.8
+Malaysia,Miri,Evening,30.1
+Malaysia,Ipoh,Morning,24.3
+Malaysia,Ipoh,Evening,27.6
+Australia,Perth,Morning,25.3
+Australia,Perth,Evening,28.7
+Australia,Adelaide,Morning,16.5
+Australia,Adelaide,Evening,21.0
