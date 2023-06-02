@@ -102,7 +102,7 @@ public class TemperatureComparator {
     }
 
     public static void main(String[] args) {
-        String filename = "temps.csv";
+        String filename = "temperature_data.csv";
         readTemperatureDataFromFile(filename);
 
         Scanner scanner = new Scanner(System.in);
