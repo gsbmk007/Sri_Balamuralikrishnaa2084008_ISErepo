@@ -5,7 +5,9 @@ public class SeasonsTesting {
     public static void main(String[] args) {
         Map<String, String[]> seasonsData = SeasonHandler.readSeasonsDataFromFile("Seasons.csv");
 
-        // Valid country, valid month
+        // Valid country, valid month   
+             TemperatureHandler.readTemperatureDataFromFile("temps.csv");
+
         String result1 = SeasonHandler.getSeason(seasonsData, "Australia", 3);
         String expected1 = "Autumn-Bunuru";
         System.out.println("------------------------------");
@@ -108,5 +110,35 @@ public class SeasonsTesting {
         System.out.println("Output: " + result10);
         System.out.println("Test Result: " + (result10.equals(expected10) ? "Passed" : "Failed"));
         System.out.println("------------------------------");
-    }
-}
+
+
+
+   // Valid inputs
+   String country1 = "Japan";
+   String city1 = "Tokyo";
+   String time1 = "Morning";
+   double temp1 = 25.3;
+   String expected11 = TemperatureHandler.compareTemperature(country1, city1, time1, temp1);
+   System.out.println("------------------------------");
+   System.out.println("Test Case 1:");
+   System.out.println("Input: Country: " + country1 + ", City: " + city1 + ", Time: " + time1 + ", Temperature: " + temp1);
+   System.out.println("Expected Output: " + expected11);
+   System.out.println("Output: " + determineTemperatureStatus(seasonsData, temperatureData, country1, city1, time1, temp1));
+   System.out.println("Test Result: " + (determineTemperatureStatus(seasonsData, temperatureData, country1, city1, time1, temp1).equals(expected11) ? "Passed" : "Failed"));
+   System.out.println("------------------------------");
+
+   String country2 = "Spain";
+   String city2 = "Madrid";
+   String time2 = "Evening";
+   double temp2 = 23.4;
+   String expected12 = TemperatureHandler.compareTemperature(country2, city2, time2, temp2);
+   System.out.println("Test Case 2:");
+   System.out.println("Input: Country: " + country2 + ", City: " + city2 + ", Time: " + time2 + ", Temperature: " + temp2);
+   System.out.println("Expected Output: " + expected12);
+   System.out.println("Output: " + determineTemperatureStatus(seasonsData, temperatureData, country2, city2, time2, temp2));
+   System.out.println("Test Result: " + (determineTemperatureStatus(seasonsData, temperatureData, country2, city2, time2, temp2).equals(expected12) ? "Passed" : "Failed"));
+   System.out.println("------------------------------");
+
+        
+    }}
+
