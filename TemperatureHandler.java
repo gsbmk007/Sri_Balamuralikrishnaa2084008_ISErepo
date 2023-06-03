@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TemperatureHandler {
-    private static HashMap<String, Double> temperatures;
+    public static HashMap<String, Double> temperatures;
 
     public static void readTemperatureDataFromFile(String fileName) {
         temperatures = new HashMap<>();
@@ -40,7 +40,7 @@ public class TemperatureHandler {
         }
     }
 
-    private static String findMatchingKey(String country, String city, String timeOfDay) {
+    public static String findMatchingKey(String country, String city, String timeOfDay) {
         for (String key : temperatures.keySet()) {
             String[] parts = key.split(",");
             String storedCountry = parts[0];
