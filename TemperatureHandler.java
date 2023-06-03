@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class TemperatureHandler{
+public class TemperatureHandler {
     private static final Map<String, Map<String, Double>> temperatureData = new HashMap<>();
 
     public static void readTemperatureDataFromFile(String filename) {
@@ -35,9 +35,10 @@ public class TemperatureHandler{
         }
     }
 
-    public static void compareTemperature(String country, String city, double temperature) {
+    public static String compareTemperature(String country, String city, double temperature) {
         String formattedCountry = formatCountry(country);
         String formattedCity = formatCity(city);
+        String result = "";
 
         String morningKey = formattedCity + "_Morning";
         String eveningKey = formattedCity + "_Evening";
@@ -47,27 +48,30 @@ public class TemperatureHandler{
             Double morningAverage = calculateAverage(cityTemperatures, morningKey);
             Double eveningAverage = calculateAverage(cityTemperatures, eveningKey);
 
-            System.out.println("Morning Average Temperature: " + morningAverage);
-            System.out.println("Evening Average Temperature: " + eveningAverage);
+            result += "Morning Average Temperature: " + morningAverage + "\n";
+            result += "Evening Average Temperature: " + eveningAverage + "\n";
 
             double minTemperature = Math.min(morningAverage, eveningAverage);
             double maxTemperature = Math.max(morningAverage, eveningAverage);
             double meanTemperature = (morningAverage + eveningAverage) / 2.0;
 
-            System.out.println("Minimum Temperature: " + minTemperature);
-            System.out.println("Maximum Temperature: " + maxTemperature);
-            System.out.println("Mean Temperature: " + meanTemperature);
+            result += "Minimum Temperature: " + minTemperature + "\n";
+            result += "Maximum Temperature: " + maxTemperature + "\n";
+            result += "Mean Temperature: " + meanTemperature + "\n";
 
             if (temperature < morningAverage && temperature < eveningAverage) {
-                System.out.println("The temperature is colder than both morning and evening averages.");
+                result += "The temperature is colder than both morning and evening averages.";
             } else if (temperature < morningAverage || temperature < eveningAverage) {
-                System.out.println("The temperature is colder than one of the morning or evening averages.");
+                result += "The temperature is colder than one of the morning or evening averages.";
             } else {
-                System.out.println("The temperature is warmer than both morning and evening averages.");
+                result += "The temperature is warmer than both morning and evening averages.";
             }
+
         } else {
-            System.out.println("Temperature data not found for the given country and city.");
+            return "Temperature data not found for the given country and city.";
         }
+        return result;
+
     }
 
     private static double calculateAverage(Map<String, Double> cityTemperatures, String key) {
@@ -100,7 +104,4 @@ public class TemperatureHandler{
         }
         return formattedCity.toString().trim();
     }
-
-    
-
 }

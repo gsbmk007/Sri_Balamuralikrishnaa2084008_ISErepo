@@ -1,26 +1,22 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import javax.swing.*;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.util.Map;
 
 public class SeasonFinder {
     public static void main(String[] args) {
 
         // Read the seasons data from the file
-        Map<String, String[]> seasonsData = seasonhandler.readSeasonsDataFromFile("Seasons.csv");
+        Map<String, String[]> seasonsData = SeasonHandler.readSeasonsDataFromFile("Seasons.csv");
         TemperatureHandler.readTemperatureDataFromFile("temps.csv");
 
         // Create the main frame
         JFrame frame = new JFrame("Season Finder");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
+        frame.setSize(400, 250);
 
         // Set the background color of the frame to dark grey (bg-gray-800)
         frame.getContentPane().setBackground(new Color(51, 51, 51));
@@ -28,26 +24,46 @@ public class SeasonFinder {
 
         // Create the panel for the form
         JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(4, 2, 10, 10));
+        formPanel.setLayout(new GridLayout(6, 2, 10, 10));
         formPanel.setBackground(new Color(51, 51, 51));
+
+        // Create a line border with grey color
+        Border border = BorderFactory.createLineBorder(Color.GRAY);
 
         // Create the UI components
         JLabel countryLabel = new JLabel("Country:");
+        countryLabel.setForeground(Color.WHITE);
         JTextField countryTextField = new JTextField();
+        countryTextField.setBorder(border);
 
         JLabel monthLabel = new JLabel("Month (1-12):");
+        monthLabel.setForeground(Color.WHITE);
         JTextField monthTextField = new JTextField();
+        monthTextField.setBorder(border);
 
         JLabel cityLabel = new JLabel("City name:");
+        cityLabel.setForeground(Color.WHITE);
+
         JTextField cityTextField = new JTextField();
+        cityTextField.setBorder(border);
 
         JLabel temperatureLabel = new JLabel("Temperature reading:");
+        
         JTextField temperatureTextField = new JTextField();
-
-        countryLabel.setForeground(Color.WHITE);
-        monthLabel.setForeground(Color.WHITE);
-        cityLabel.setForeground(Color.WHITE);
+        temperatureTextField.setBorder(border);
         temperatureLabel.setForeground(Color.WHITE);
+        JLabel resultLabel = new JLabel("Season:");
+        resultLabel.setForeground(Color.WHITE);
+        JLabel temperatureResultLabel = new JLabel("");
+        temperatureResultLabel.setForeground(Color.WHITE);
+
+        JLabel resultTextLabel = new JLabel("Result:");
+        resultTextLabel.setForeground(Color.WHITE);
+        JTextArea resultTextArea = new JTextArea();
+        resultTextArea.setEditable(false);
+        resultTextArea.setForeground(Color.WHITE);
+        resultTextArea.setBackground(new Color(51, 51, 51));
+        JScrollPane scrollPane = new JScrollPane(resultTextArea);
 
         formPanel.add(countryLabel);
         formPanel.add(countryTextField);
@@ -57,6 +73,10 @@ public class SeasonFinder {
         formPanel.add(cityTextField);
         formPanel.add(temperatureLabel);
         formPanel.add(temperatureTextField);
+        formPanel.add(resultLabel);
+        formPanel.add(temperatureResultLabel);
+        formPanel.add(resultTextLabel);
+        formPanel.add(scrollPane);
 
         // Create the submit button
         JButton submitButton = new JButton("Submit");
@@ -69,14 +89,17 @@ public class SeasonFinder {
             double temperature = Double.parseDouble(temperatureTextField.getText());
 
             // Find and display the corresponding season
-            String season = seasonhandler.getSeason(seasonsData, country, month);
-            TemperatureHandler.compareTemperature(country, city, temperature);
+            String season = SeasonHandler.getSeason(seasonsData, country, month);
+            String result = TemperatureHandler.compareTemperature(country, city, temperature);
+            System.out.println(result);
 
             if (season != null) {
-                JOptionPane.showMessageDialog(frame, "The season in " + country + " for month " + month + " is: " + season);
+                temperatureResultLabel.setText("The season in " + country + " for month " + month + " is: " + season);
             } else {
-                JOptionPane.showMessageDialog(frame, "Season data not found for the given country and month.");
+                temperatureResultLabel.setText("Season data not found for the given country and month.");
             }
+
+            resultTextArea.setText(result);
         });
 
         // Create a panel for the submit button
@@ -85,6 +108,8 @@ public class SeasonFinder {
         buttonPanel.add(submitButton);
 
         // Add the form panel and button panel to the frame
+        scrollPane.setPreferredSize(new Dimension(3000, 1050)); // Adjust the width and height as needed
+
         frame.add(formPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
