@@ -62,7 +62,7 @@ public class SeasonHandler {
             return seasons[month - 1];
         }
 
-        return null;
+        return "Unknown";
     }
 }
     
